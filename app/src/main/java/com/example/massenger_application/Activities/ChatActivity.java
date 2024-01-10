@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.massenger_application.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,6 +18,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText messageEd;
     private FloatingActionButton sendBtn;
     private ImageView cameraImg;
+    private LinearLayout backBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class ChatActivity extends AppCompatActivity {
         messageEd = findViewById(R.id.chatEd);
         sendBtn = findViewById(R.id.sendBtn);
         cameraImg = findViewById(R.id.cameraImg);
+        backBtn = findViewById(R.id.backLinearLayout);
 
         setIconVisibility();
 
@@ -42,6 +46,14 @@ public class ChatActivity extends AppCompatActivity {
                 setIconVisibility();
             }
         });
+
+      backBtn.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              finish();
+          }
+      });
+
     }
     private void setIconVisibility(){
         if (!messageEd.getText().toString().isEmpty()){
