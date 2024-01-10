@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.ChatActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +15,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <LinearLayout
             android:id="@+id/backLinearLayout"
@@ -40,10 +40,11 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_weight="1.0"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:layout_marginEnd="6dp"
                 android:src="@drawable/place_holder" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/textView3"
@@ -52,61 +53,77 @@
             android:gravity="center"
             android:text="Name"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4" />
-
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/backLinearLayout" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="last seen today at 5:41"
+            android:singleLine="true"
+            android:text="last seen 10:01:2024 11:39:pm"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_marginStart="4dp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/backLinearLayout"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/backLinearLayout" />
 
-
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
             android:orientation="horizontal"
             android:weightSum="3"
-            android:layout_marginEnd="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="15dp"
-                android:src="@drawable/video_call_icon" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/phone_icon"
-                android:layout_marginEnd="15dp"/>
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:gravity="center"
-                android:text="&#65049;"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone_icon"
+            android:layout_marginEnd="7dp"
+            android:padding="4dp"
+            android:clickable="true"
+            android:foreground="@drawable/phone_foreground_bg"
+            app:layout_constraintBottom_toBottomOf="@+id/chat_threeDotBtn"
+            app:layout_constraintEnd_toStartOf="@+id/chat_threeDotBtn"
+            app:layout_constraintTop_toTopOf="@+id/chat_threeDotBtn" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:padding="4dp"
+            android:clickable="true"
+            android:foreground="@drawable/phone_foreground_bg"
+            android:src="@drawable/video_call_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+
+        <ImageView
+            android:id="@+id/chat_threeDotBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/three_dots_vertical"
+            android:padding="4dp"
+            android:clickable="true"
+            android:foreground="@drawable/phone_foreground_bg"
+            android:layout_marginEnd="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

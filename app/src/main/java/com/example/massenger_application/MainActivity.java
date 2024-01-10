@@ -9,6 +9,11 @@ import android.view.View;
 import com.example.massenger_application.Activities.ChatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Formatter;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,5 +28,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ChatActivity.class));
             }
         });
+        getStatus();
     }
+    private void getStatus(){
+        Date currentTime = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
+        String formattedTime = sdf.format(currentTime);
+        System.out.println("Current time: " + formattedTime);
+    }
+
 }
