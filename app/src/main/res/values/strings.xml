@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Massenger_Application</string>
+    <string name="next">Next</string>
+    <string name="setup">Setup</string>
+    <string name="termText">By tapping Sign in or Create account, you
+ agree to our Term of Service. Learn how we process your data in our Privacy Policy and Cookies Policy</string>
+    <string name="user_name">User Name</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="pleas_wait_n_you_ll_receive_otp_code_shortly">Pleas wait..\n you\'ll receive OTP Code shortly</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="we_need_your_number_in_order_to_send_you_ticket_confirmation_message_nwe_will_send_you_an_otp_code_nplease_don_t_share_your_otp_code_with_anyone">We need your number in order to send you ticket confirmation message.\nWe will send you an OTP Code\nPlease don\'t share your OTP Code with anyone.</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

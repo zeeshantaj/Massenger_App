@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Massenger_Application" parent="Base.Theme.Massenger_Application" />
+    <style name="OutlinedBoxStyle_Normal" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/blue</item>
+        <item name="android:textColorHint">@color/black</item>
+    </style>
 </resources>

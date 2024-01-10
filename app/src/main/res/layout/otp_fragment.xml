@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ice"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ProgressBar
+        android:id="@+id/otpProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/otp_img"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:src="@drawable/otp_img"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_bg"
+            android:text="@string/pleas_wait_n_you_ll_receive_otp_code_shortly"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timer left  2:00"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/resendTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="@string/resend_otp"
+            android:visibility="gone"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:layout_gravity="end"/>
+
+        <in.aabhasjindal.otptextview.OtpTextView
+            android:id="@+id/otp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            app:bar_inactive_color="@color/black"
+            android:textColor="@color/blue"
+            app:bar_enabled="true"
+            app:bar_height="2dp"
+            app:height="40dp"
+            app:length="6"
+            app:otp_text_size="24dp"
+            app:width="40dp" />
+
+        <Button
+            android:id="@+id/next2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_bg"
+            android:stateListAnimator="@animator/scale_pressed"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginTop="25dp"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
