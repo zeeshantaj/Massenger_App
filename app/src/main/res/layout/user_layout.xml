@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <androidx.cardview.widget.CardView
+        android:id="@+id/userItemCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/white"
+        android:clickable="true"
         android:layout_margin="10dp"
+        android:foreground="@drawable/foreground_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,53 +24,44 @@
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/chat_img"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:id="@+id/user_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:layout_goneMarginStart="5dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/place_holder"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/chat_name"
+                android:id="@+id/user_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="Name of person"
-                android:layout_marginEnd="6dp"
+                android:text="Name "
                 android:textColor="@color/black"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toStartOf="@+id/chat_lastMstTime"
-                app:layout_constraintStart_toEndOf="@+id/chat_img"
-                app:layout_constraintTop_toTopOf="@+id/chat_img" />
+                android:layout_marginStart="5dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/user_img"
+                app:layout_constraintTop_toTopOf="@+id/user_img" />
+
 
             <TextView
-                android:id="@+id/chat_lastMstTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8:31 pm"
-                android:textSize="24sp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/chat_img" />
-
-            <TextView
-                android:id="@+id/chat_lastMsg"
+                android:id="@+id/user_status"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="Last message"
-                android:textSize="30sp"
+                android:text="status"
+                android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/chat_name"
-                app:layout_constraintTop_toBottomOf="@+id/chat_name" />
+                app:layout_constraintStart_toStartOf="@+id/user_name"
+                app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

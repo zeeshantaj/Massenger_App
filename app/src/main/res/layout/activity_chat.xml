@@ -36,6 +36,7 @@
                 android:src="@drawable/back_arrow" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/chat_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -47,19 +48,19 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/chat_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Name"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintBottom_toTopOf="@+id/chat_lastSeen"
+            app:layout_constraintStart_toStartOf="@+id/chat_lastSeen"
             app:layout_constraintTop_toTopOf="@+id/backLinearLayout" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/chat_lastSeen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -89,8 +90,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/phone_icon"
-            android:layout_marginEnd="7dp"
-            android:padding="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="6dp"
             android:clickable="true"
             android:foreground="@drawable/phone_foreground_bg"
             app:layout_constraintBottom_toBottomOf="@+id/chat_threeDotBtn"
@@ -101,8 +102,8 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="7dp"
-            android:padding="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="6dp"
             android:clickable="true"
             android:foreground="@drawable/phone_foreground_bg"
             android:src="@drawable/video_call_icon"
@@ -116,10 +117,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/three_dots_vertical"
-            android:padding="4dp"
+            android:padding="6dp"
             android:clickable="true"
             android:foreground="@drawable/phone_foreground_bg"
-            android:layout_marginEnd="7dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

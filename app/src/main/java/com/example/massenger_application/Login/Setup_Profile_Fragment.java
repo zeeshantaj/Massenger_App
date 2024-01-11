@@ -44,7 +44,10 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import androidx.annotation.NonNull;
@@ -105,10 +108,17 @@ public class Setup_Profile_Fragment extends Fragment {
 
                         imageRef.getDownloadUrl().addOnSuccessListener(uir -> {
 
+                            Date currentTime = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
+                            String formattedTime = sdf.format(currentTime);
+
                             String image = uir.toString();
                             value.put("name", name);
                             value.put("image", image);
-                            value.put("associatedID", uid);
+                            value.put("status", "hey there i am using messenger ");
+                            value.put("last_seen_status", formattedTime);
+                            value.put("associatedId", uid);
+
 
                             reference.setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
