@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
@@ -43,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView name,lastSeen;
     private String receiverId;
     private ChatRoom chatRoom;
-    private String senderId;
+    private String senderId,chatRoomId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +59,12 @@ public class ChatActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backLinearLayout);
         setIconVisibility();
 
+
+
         FirebaseAuth auth = FirebaseAuth.getInstance();
         senderId = auth.getUid();
+
+
         messageEd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,54 +92,15 @@ public class ChatActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               String message = messageEd.getText().toString();
-              if (message.isEmpty()){
-                  return;
-              }
               sendMessage(message);
+              Toast.makeText(ChatActivity.this, "send", Toast.LENGTH_SHORT).show();
           }
-
       });
       userInfo();
       initRecycler();
       CreateChatRoom();
     }
-    private void sendMessage(String message) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String chatRoomId = auth.getUid();
-        chatRoom.setTimestamp(Timestamp.now());
-        chatRoom.setLastMessageSenderId(senderId);
-        ChatMessageModel chatMessageModel = new ChatMessageModel(message,chatRoomId,Timestamp.now());
 
-        FirebaseUtils.getChatRoomMessageReference(chatRoomId).add(chatMessageModel)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()){
-                            messageEd.setText("");
-                        }
-                    }
-                });
-
-    }
-
-    private void CreateChatRoom(){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String chatRoomId = auth.getUid();
-        FirebaseUtils.getChatRoomReference(chatRoomId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                chatRoom = task.getResult().toObject(ChatRoom.class);
-                if (chatRoom == null){
-                    chatRoom = new ChatRoom(
-                            chatRoomId,
-                            receiverId,
-                            Timestamp.now(),
-                            ""
-                    );
-                    FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoom);
-                }
-            }
-        });
-    }
     private void setIconVisibility(){
         if (!messageEd.getText().toString().isEmpty()){
             sendBtn.setImageResource(R.drawable.send_icon);
@@ -152,14 +119,58 @@ public class ChatActivity extends AppCompatActivity {
         String lastSeenStr = intent.getStringExtra("lastSeen");
         receiverId = intent.getStringExtra("associatedId");
 
-
+        chatRoomId = FirebaseUtils.getChatRoomId(senderId,receiverId);
+        Log.e("MyApp","uiss"+senderId+"   "+receiverId);
         name.setText(nameStr);
         lastSeen.setText(lastSeenStr);
         Glide.with(this)
                 .load(img)
                 .into(userImg);
     }
+    private void sendMessage(String message) {
 
+        chatRoom.setTimestamp(Timestamp.now());
+        chatRoom.setLastMessageSenderId(senderId);
+        FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoom);
+
+        ChatMessageModel chatMessageModel = new ChatMessageModel(message,senderId,Timestamp.now());
+        FirebaseUtils.getChatRoomMessageReference(chatRoomId).add(chatMessageModel)
+                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()){
+                            messageEd.setText("");
+                        }
+                        else {
+                            Toast.makeText(ChatActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ChatActivity.this, "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void CreateChatRoom(){
+        //FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUtils.getChatRoomReference(chatRoomId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                chatRoom = task.getResult().toObject(ChatRoom.class);
+                if (chatRoom == null){
+                    chatRoom = new ChatRoom(
+                            chatRoomId,
+                            receiverId,
+                            Timestamp.now(),
+                            ""
+                    );
+                    FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoom);
+                }
+            }
+        });
+    }
     private void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.chatRecycler);
 
