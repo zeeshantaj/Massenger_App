@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,9 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.massenger_application.Activities.ChatActivity;
-import com.example.massenger_application.Activities.Users_Activity;
-import com.example.massenger_application.Interfaces.ClickListener;
+import com.example.massenger_application.Chat.ChatActivity;
 import com.example.massenger_application.Model.Users;
 import com.example.massenger_application.R;
 
@@ -58,6 +55,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 intent.putExtra("associatedId",users.getAssociatedId());
                 intent.putExtra("lastSeen",users.getLast_seen_status());
                 v.getContext().startActivity(intent);
+                Toast.makeText(v.getContext(), "id"+users.getAssociatedId(), Toast.LENGTH_SHORT).show();
             }
         });
     }

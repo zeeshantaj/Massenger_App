@@ -67,11 +67,11 @@ public class Users_Activity extends AppCompatActivity {
                         String name = dataSnapshot.child("name").getValue(String.class);
                         String image = dataSnapshot.child("image").getValue(String.class);
                         String status = dataSnapshot.child("status").getValue(String.class);
-                        String associatedID = dataSnapshot.child("associatedID").getValue(String.class);
+                        String associatedID = dataSnapshot.child("associatedId").getValue(String.class);
                         String lastSeen = dataSnapshot.child("last_seen_status").getValue(String.class);
                         users = new Users(associatedID,name,image,status,lastSeen);
 
-                        Log.e("MyApp","name"+name);
+                        Log.e("MyApp","name"+associatedID);
                     }
                     usersList.add(users);
                     UserAdapter adapter = new UserAdapter(usersList);
