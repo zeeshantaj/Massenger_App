@@ -2,6 +2,7 @@ package com.example.massenger_application.Chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -172,10 +175,15 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
     private void initRecycler(){
+        Query query = FirebaseUtils.getChatRoomMessageReference(chatRoomId)
+                .orderBy("timestamp",Query.Direction.DESCENDING);
+
+        FirestoreRecyclerOptions<ChatMessageModel> options = new FirestoreRecyclerOptions.Builder<ChatMessageModel>()
+                .setQuery(query,ChatMessageModel.class).build();
         RecyclerView recyclerView = findViewById(R.id.chatRecycler);
-
-
-        DatabaseReference databaseReference = FirebaseDatabase
-                .getInstance().getReference("Messages").child(senderId).child(receiverId).child("chat");
+        ChatRecyclerAdapter adapter = new ChatRecyclerAdapter(options,getApplicationContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 }
