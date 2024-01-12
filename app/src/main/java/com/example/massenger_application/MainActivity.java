@@ -11,10 +11,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.massenger_application.Activities.Users_Activity;
-import com.example.massenger_application.Adapter.UserAdapter;
+import com.example.massenger_application.Chat.ChatRoomModel;
 import com.example.massenger_application.Home.UserChatsRecyclerAdapter;
-import com.example.massenger_application.Home.Users_Chat_Model;
-import com.example.massenger_application.Model.Users;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -53,10 +51,12 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
 
         String uid = FirebaseUtils.currentUserId();
-        Query query = FirebaseUtils.getChatRoomMessageReference(uid);
+        Query query = FirebaseUtils.getAllChatRoomCollection()
+                .whereArrayContains("senderIds",uid)
+                .orderBy("lastMessageTimeStamp",Query.Direction.DESCENDING);
 
-        FirestoreRecyclerOptions<Users_Chat_Model> options = new FirestoreRecyclerOptions.Builder<Users_Chat_Model>()
-                .setQuery(query,Users_Chat_Model.class).build();
+        FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>()
+                .setQuery(query, ChatRoomModel.class).build();
         UserChatsRecyclerAdapter adapter = new UserChatsRecyclerAdapter(options);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setReverseLayout(false);
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
     private void getStatus(){
 
     }
-
-
 
     @Override
     protected void onDestroy() {

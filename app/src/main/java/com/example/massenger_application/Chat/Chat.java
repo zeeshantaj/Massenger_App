@@ -3,32 +3,41 @@ package com.example.massenger_application.Chat;
 import com.google.firebase.Timestamp;
 
 public class Chat {
-    private String senderId,message;
+    private String name,image,lastMessage;
     private Timestamp timestamp;
 
     public Chat() {
     }
 
-    public Chat(String senderId, String message, Timestamp timestamp) {
-        this.senderId = senderId;
-        this.message = message;
+    public Chat(String name, String image, String lastMessage, Timestamp timestamp) {
+        this.name = name;
+        this.image = image;
+        this.lastMessage = lastMessage;
         this.timestamp = timestamp;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public String getName() {
+        return name;
     }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMessage() {
-        return message;
+    public String getImage() {
+        return image;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getLastMessage() {
+        return lastMessage;
+    }
+
+    public void setLastMessage(String lastMessage) {
+        this.lastMessage = lastMessage;
     }
 
     public Timestamp getTimestamp() {

@@ -34,6 +34,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -49,6 +50,7 @@ public class ChatActivity extends AppCompatActivity {
     private String receiverId;
     private ChatRoom chatRoom;
     private String senderId,chatRoomId;
+    private ChatRoomModel chatRoomModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,9 +137,10 @@ public class ChatActivity extends AppCompatActivity {
     }
     private void sendMessage(String message) {
 
-        chatRoom.setTimestamp(Timestamp.now());
-        chatRoom.setLastMessageSenderId(senderId);
-        FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoom);
+        chatRoomModel.setLastMessageTimeStamp(Timestamp.now());
+        chatRoomModel.setLastMessageSenderId(senderId);
+        chatRoomModel.setLastMessage(message);
+        FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoomModel);
 
         ChatMessageModel chatMessageModel = new ChatMessageModel(message,senderId,Timestamp.now());
         FirebaseUtils.getChatRoomMessageReference(chatRoomId).add(chatMessageModel)
@@ -161,15 +164,15 @@ public class ChatActivity extends AppCompatActivity {
         //FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUtils.getChatRoomReference(chatRoomId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()){
-                chatRoom = task.getResult().toObject(ChatRoom.class);
-                if (chatRoom == null){
-                    chatRoom = new ChatRoom(
+                chatRoomModel = task.getResult().toObject(ChatRoomModel.class);
+                if (chatRoomModel == null){
+                    chatRoomModel = new ChatRoomModel(
                             chatRoomId,
-                            receiverId,
+                            Arrays.asList(senderId,receiverId),
                             Timestamp.now(),
                             ""
                     );
-                    FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoom);
+                    FirebaseUtils.getChatRoomReference(chatRoomId).set(chatRoomModel);
                 }
             }
         });

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -10,7 +11,9 @@
         android:background="@color/white"
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="8:31 pm"
                 android:textSize="12sp"
+                android:textColor="@color/black"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/main_img" />
@@ -63,6 +67,7 @@
                 android:singleLine="true"
                 android:text="Last message"
                 android:textSize="14sp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/main_message_name"
                 app:layout_constraintTop_toBottomOf="@+id/main_message_name" />
