@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatRoom chatRoom;
     private String senderId,chatRoomId;
     private ChatRoomModel chatRoomModel;
+    private ImageView menuItemBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,7 @@ public class ChatActivity extends AppCompatActivity {
         userImg = findViewById(R.id.chat_img);
         cameraImg = findViewById(R.id.cameraImg);
         backBtn = findViewById(R.id.backLinearLayout);
+        menuItemBtn = findViewById(R.id.chat_menuItem);
         setIconVisibility();
 
 
@@ -107,6 +112,7 @@ public class ChatActivity extends AppCompatActivity {
       userInfo();
       initRecycler();
       CreateChatRoom();
+      setMenuItem();
     }
 
     private void setIconVisibility(){
@@ -198,6 +204,32 @@ public class ChatActivity extends AppCompatActivity {
                 recyclerView.smoothScrollToPosition(0);
             }
         });
+
+    }
+    private void setMenuItem(){
+        menuItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a PopupMenu
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                MenuInflater inflater = popupMenu.getMenuInflater();
+                inflater.inflate(R.menu.chat_options_menu, popupMenu.getMenu());
+
+                // Set a click listener on the menu items
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    // Handle menu item clicks here
+                    int id = item.getItemId();
+                    if (id == R.id.wallpaper) {
+                        Toast.makeText(ChatActivity.this, "wall clicked", Toast.LENGTH_SHORT).show();
+                    }
+                return true;
+                });
+                // Show the PopupMenu
+                popupMenu.show();
+            }
+        });
+    }
+    private void setWallAndColor(){
 
     }
 }
