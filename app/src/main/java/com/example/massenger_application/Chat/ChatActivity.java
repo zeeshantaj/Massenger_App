@@ -2,6 +2,8 @@ package com.example.massenger_application.Chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -22,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
+import com.example.massenger_application.Colors_fragment.Colors_Fragment;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -55,6 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     private String senderId,chatRoomId;
     private ChatRoomModel chatRoomModel;
     private ImageView menuItemBtn;
+    private FrameLayout fragmentContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         cameraImg = findViewById(R.id.cameraImg);
         backBtn = findViewById(R.id.backLinearLayout);
         menuItemBtn = findViewById(R.id.chat_menuItem);
+        fragmentContainer = findViewById(R.id.fragmentContainer);
         setIconVisibility();
 
 
@@ -220,6 +227,7 @@ public class ChatActivity extends AppCompatActivity {
                     // Handle menu item clicks here
                     int id = item.getItemId();
                     if (id == R.id.wallpaper) {
+                        startActivity(new Intent(ChatActivity.this, Color_Selection_Activity.class));
                         Toast.makeText(ChatActivity.this, "wall clicked", Toast.LENGTH_SHORT).show();
                     }
                 return true;
@@ -228,8 +236,5 @@ public class ChatActivity extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-    }
-    private void setWallAndColor(){
-
     }
 }

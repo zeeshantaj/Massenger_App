@@ -8,4 +8,32 @@
     <color name="ice">#EBF6FF</color>
     <color name="red">#F44336</color>
     <color name="semiTransparentGrey">#88000000</color>
+    <color name="card1">#488789</color>
+    <color name="card2">#336952</color>
+    <color name="card3">#255d43</color>
+    <color name="card4">#305480</color>
+    <color name="card5">#1a6162</color>
+    <color name="card6">#1c535e</color>
+    <color name="card7">#2b2064</color>
+    <color name="card8">#525252</color>
+    <color name="card9">#5a683a</color>
+    <color name="card10">#7b7228</color>
+    <color name="card11">#605001</color>
+    <color name="card12">#a05d02</color>
+    <color name="card13">#5b0203</color>
+    <color name="card14">#510103</color>
+    <color name="card15">#48020e</color>
+    <color name="card16">#3a0d1a</color>
+    <color name="card17">#642513</color>
+    <color name="card18">#281f22</color>
+    <color name="card19">#1f3232</color>
+    <color name="card20">#143a4b</color>
+    <color name="card21">#152237</color>
+    <color name="card22">#2c3237</color>
+    <color name="card23">#0c0e10</color>
+    <color name="card24">#120c15</color>
+    <color name="card25">#50686e</color>
+    <color name="card26">#606000</color>
+    <color name="card27">#72753b</color>
+
 </resources>
