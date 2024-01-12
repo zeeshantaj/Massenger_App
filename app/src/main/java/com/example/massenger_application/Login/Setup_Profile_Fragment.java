@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.massenger_application.Animation.ShakeAnimation;
 import com.example.massenger_application.MainActivity;
+import com.example.massenger_application.Utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -120,33 +121,52 @@ public class Setup_Profile_Fragment extends Fragment {
                             value.put("associatedId", uid);
 
 
-                            reference.setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            FirebaseUtils.currentUserDetails().set(value).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(getActivity(), "User created successfully", Toast.LENGTH_SHORT).show();
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(getActivity(), "User Created Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
-
-                                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                                    editor.putString("shareName",name);
-                                    editor.putString("shareImageUrl",image);
-                                    editor.apply();
-
                                     startActivity(intent);
-                                    getActivity().finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
                                     ShakeAnimation.setAnimation(getActivity(),profileImage);
                                     ShakeAnimation.setAnimation(getActivity(),userName);
-                                    progressBar.setVisibility(View.GONE);
                                     setup.setEnabled(true);
                                     Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                     Log.e("MyApp", "Error " + e.getLocalizedMessage());
                                 }
                             });
+//                            reference.setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    Toast.makeText(getActivity(), "User created successfully", Toast.LENGTH_SHORT).show();
+//                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+//
+//                                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//                                    editor.putString("shareName",name);
+//                                    editor.putString("shareImageUrl",image);
+//                                    editor.apply();
+//
+//                                    startActivity(intent);
+//                                    getActivity().finish();
+//                                }
+//                            }).addOnFailureListener(new OnFailureListener() {
+//                                @Override
+//                                public void onFailure(@NonNull Exception e) {
+//                                    ShakeAnimation.setAnimation(getActivity(),profileImage);
+//                                    ShakeAnimation.setAnimation(getActivity(),userName);
+//                                    progressBar.setVisibility(View.GONE);
+//                                    setup.setEnabled(true);
+//                                    Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//                                    Log.e("MyApp", "Error " + e.getLocalizedMessage());
+//                                }
+//                            });
 
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

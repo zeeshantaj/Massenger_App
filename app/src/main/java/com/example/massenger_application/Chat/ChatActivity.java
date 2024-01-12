@@ -95,8 +95,11 @@ public class ChatActivity extends AppCompatActivity {
           @Override
           public void onClick(View v) {
               String message = messageEd.getText().toString();
+              if (message.isEmpty()){
+                  return;
+              }
               sendMessage(message);
-              Toast.makeText(ChatActivity.this, "send", Toast.LENGTH_SHORT).show();
+
           }
       });
       userInfo();
@@ -144,9 +147,6 @@ public class ChatActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             messageEd.setText("");
                         }
-                        else {
-                            Toast.makeText(ChatActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
-                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -182,8 +182,19 @@ public class ChatActivity extends AppCompatActivity {
                 .setQuery(query,ChatMessageModel.class).build();
         RecyclerView recyclerView = findViewById(R.id.chatRecycler);
         ChatRecyclerAdapter adapter = new ChatRecyclerAdapter(options,getApplicationContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setReverseLayout(true);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.startListening();
+        // todo showing the send message on front not on behind on keyboard
+        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
     }
 }

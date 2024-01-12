@@ -18,15 +18,20 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.massenger_application.Adapter.UserAdapter;
+import com.example.massenger_application.Chat.ChatMessageModel;
+import com.example.massenger_application.Chat.ChatRecyclerAdapter;
 import com.example.massenger_application.MainActivity;
 import com.example.massenger_application.Model.Users;
 import com.example.massenger_application.R;
+import com.example.massenger_application.Utils.FirebaseUtils;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
@@ -47,43 +52,48 @@ public class Users_Activity extends AppCompatActivity {
     private void initRecycler(){
 
         RecyclerView recyclerView = findViewById(R.id.userRecycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Users_Activity.this,LinearLayoutManager.VERTICAL,false));
-        List<Users> usersList = new ArrayList<>();
 
+        Query query = FirebaseUtils.allUserCollectionReference();
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String uid = auth.getUid();
+        FirestoreRecyclerOptions<Users> options = new FirestoreRecyclerOptions.Builder<Users>()
+                .setQuery(query,Users.class).build();
+        UserAdapter adapter = new UserAdapter(options,getApplicationContext());
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setReverseLayout(false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+        adapter.startListening();
 
-        DatabaseReference databaseReference = FirebaseDatabase
-                .getInstance()
-                .getReference("Users");
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersList.clear();
-                if (snapshot.exists()){
-                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        String name = dataSnapshot.child("name").getValue(String.class);
-                        String image = dataSnapshot.child("image").getValue(String.class);
-                        String status = dataSnapshot.child("status").getValue(String.class);
-                        String associatedID = dataSnapshot.child("associatedId").getValue(String.class);
-                        String lastSeen = dataSnapshot.child("last_seen_status").getValue(String.class);
-                        users = new Users(associatedID,name,image,status,lastSeen);
-
-                        Log.e("MyApp","name"+associatedID);
-                    }
-                    usersList.add(users);
-                    UserAdapter adapter = new UserAdapter(usersList);
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Users_Activity.this, "Error "+ error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        DatabaseReference databaseReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference("Users");
+//
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                usersList.clear();
+//                if (snapshot.exists()){
+//                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+//                        String name = dataSnapshot.child("name").getValue(String.class);
+//                        String image = dataSnapshot.child("image").getValue(String.class);
+//                        String status = dataSnapshot.child("status").getValue(String.class);
+//                        String associatedID = dataSnapshot.child("associatedId").getValue(String.class);
+//                        String lastSeen = dataSnapshot.child("last_seen_status").getValue(String.class);
+//                        users = new Users(associatedID,name,image,status,lastSeen);
+//
+//                        Log.e("MyApp","name"+associatedID);
+//                    }
+//                    usersList.add(users);
+//                    UserAdapter adapter = new UserAdapter(usersList);
+//                    recyclerView.setAdapter(adapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(Users_Activity.this, "Error "+ error.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
     private void setToolbar(){
