@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/videoCall"
+        android:title="Video Call"
+        android:icon="@drawable/video_call_icon"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/audioCall"
+        android:title="Audio Call"
+        android:icon="@drawable/phone_icon"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/viewContact"
         android:title="View Contact"
         app:showAsAction="collapseActionView" />

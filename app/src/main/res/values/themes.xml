@@ -3,6 +3,8 @@
     <style name="Base.Theme.Massenger_Application" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="background">@color/white</item>
+        <item name="textFillColor">@color/black</item>
     </style>
 
     <style name="Theme.Massenger_Application" parent="Base.Theme.Massenger_Application" />

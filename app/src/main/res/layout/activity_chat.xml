@@ -7,11 +7,7 @@
     android:background="@color/white"
     tools:context=".Chat.ChatActivity"
     android:id="@+id/chat_background_container">
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
@@ -52,43 +48,37 @@
                 android:src="@drawable/place_holder" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/chat_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Name"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/chat_lastSeen"
-            app:layout_constraintStart_toStartOf="@+id/chat_lastSeen"
-            app:layout_constraintTop_toTopOf="@+id/backLinearLayout" />
-
-        <TextView
-            android:id="@+id/chat_lastSeen"
+        <LinearLayout
+            android:id="@+id/otherPersonProfileLinearLay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="last seen 10:01:2024 11:39:pm"
-            android:textColor="@color/black"
-            android:textSize="12sp"
+            android:orientation="vertical"
+            android:layout_marginStart="5dp"
+            android:foreground="?android:selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="@+id/backLinearLayout"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/backLinearLayout" />
+            app:layout_constraintStart_toEndOf="@+id/backLinearLayout"
+            app:layout_constraintTop_toTopOf="@+id/backLinearLayout">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="10dp"
-            android:orientation="horizontal"
-            android:weightSum="3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/chat_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-
+            <TextView
+                android:id="@+id/chat_lastSeen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="last seen 10:01:2024 11:39:pm"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
         </LinearLayout>
+
+
 
         <ImageView
             android:id="@+id/imageView2"

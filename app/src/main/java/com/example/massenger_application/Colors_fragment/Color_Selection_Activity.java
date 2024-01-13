@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import java.util.List;
 public class Color_Selection_Activity extends AppCompatActivity implements ColorAdapter.OnColorItemClickListener{
     private RecyclerView recyclerView;
     private List<Integer> colorList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,9 @@ public class Color_Selection_Activity extends AppCompatActivity implements Color
     }
     @Override
     public void onColorItemClick(int color) {
-        Toast.makeText(this, "Selected color: " + color, Toast.LENGTH_SHORT).show();
+        setChatColor(color);
+        Toast.makeText(this, "Color Selected : ", Toast.LENGTH_SHORT).show();
+        finish();
     }
     private void setRecyclerView(){
         colorList = Arrays.asList(
@@ -59,37 +64,20 @@ public class Color_Selection_Activity extends AppCompatActivity implements Color
                 ContextCompat.getColor(this, R.color.card24),
                 ContextCompat.getColor(this, R.color.card25),
                 ContextCompat.getColor(this, R.color.card26),
-                ContextCompat.getColor(this, R.color.card27)
+                ContextCompat.getColor(this, R.color.card27),
+                ContextCompat.getColor(this, R.color.white)
         );
-//        colorList.add(R.color.card1);
-//        colorList.add(R.color.card2);
-//        colorList.add(R.color.card2);
-//        colorList.add(R.color.card4);
-//        colorList.add(R.color.card5);
-//        colorList.add(R.color.card6);
-//        colorList.add(R.color.card7);
-//        colorList.add(R.color.card8);
-//        colorList.add(R.color.card9);
-//        colorList.add(R.color.card10);
-//        colorList.add(R.color.card11);
-//        colorList.add(R.color.card12);
-//        colorList.add(R.color.card13);
-//        colorList.add(R.color.card14);
-//        colorList.add(R.color.card15);
-//        colorList.add(R.color.card16);
-//        colorList.add(R.color.card17);
-//        colorList.add(R.color.card18);
-//        colorList.add(R.color.card19);
-//        colorList.add(R.color.card20);
-//        colorList.add(R.color.card21);
-//        colorList.add(R.color.card22);
-//        colorList.add(R.color.card23);
-//        colorList.add(R.color.card24);
-//        colorList.add(R.color.card25);
-//        colorList.add(R.color.card26);
-//        colorList.add(R.color.card27);
-
         ColorAdapter colorAdapter = new ColorAdapter(colorList, this);
         recyclerView.setAdapter(colorAdapter);
+    }
+
+    private void setChatColor(int color){
+        Intent intent = getIntent();
+        String chatId = intent.getStringExtra("chatId");
+        SharedPreferences sharedPreferences = getSharedPreferences("colorChangerPreference",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("chatId",chatId);
+        editor.putInt("color",color);
+        editor.apply();
     }
 }

@@ -2,19 +2,17 @@ package com.example.massenger_application.Chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -26,7 +24,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
-import com.example.massenger_application.Colors_fragment.Colors_Fragment;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -36,14 +33,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
     private String senderId,chatRoomId;
     private ChatRoomModel chatRoomModel;
     private ImageView menuItemBtn;
-    private FrameLayout fragmentContainer;
+    private ConstraintLayout chat_background_container;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +63,9 @@ public class ChatActivity extends AppCompatActivity {
         name = findViewById(R.id.chat_name);
         userImg = findViewById(R.id.chat_img);
         cameraImg = findViewById(R.id.cameraImg);
+        chat_background_container = findViewById(R.id.chat_background_container);
         backBtn = findViewById(R.id.backLinearLayout);
         menuItemBtn = findViewById(R.id.chat_menuItem);
-        fragmentContainer = findViewById(R.id.fragmentContainer);
         setIconVisibility();
 
 
@@ -120,6 +112,7 @@ public class ChatActivity extends AppCompatActivity {
       initRecycler();
       CreateChatRoom();
       setMenuItem();
+      setColor();
     }
 
     private void setIconVisibility(){
@@ -227,14 +220,38 @@ public class ChatActivity extends AppCompatActivity {
                     // Handle menu item clicks here
                     int id = item.getItemId();
                     if (id == R.id.wallpaper) {
-                        startActivity(new Intent(ChatActivity.this, Color_Selection_Activity.class));
-                        Toast.makeText(ChatActivity.this, "wall clicked", Toast.LENGTH_SHORT).show();
+                      Intent intent = new Intent(ChatActivity.this, Color_Selection_Activity.class);
+                      intent.putExtra("chatId",chatRoomId);
+                      startActivity(intent);
                     }
+                    if (id == R.id.audioCall){
+                        Toast.makeText(ChatActivity.this, "Audio Call Feature Under Process", Toast.LENGTH_SHORT).show();
+                    }
+                    if (id == R.id.videoCall){
+                        Toast.makeText(ChatActivity.this, "Video Call Feature Under Process", Toast.LENGTH_SHORT).show();
+                    }
+
                 return true;
                 });
                 // Show the PopupMenu
                 popupMenu.show();
             }
         });
+    }
+    private void setColor(){
+        SharedPreferences sharedPreferences = getSharedPreferences("colorChangerPreference",MODE_PRIVATE);
+        int savedColor = sharedPreferences.getInt("color",-1);
+        String chatId = sharedPreferences.getString("chatId","");
+        if (!chatId.isEmpty() && chatId.equals(chatRoomId)){
+            chat_background_container.setBackgroundColor(savedColor);
+        }else {
+            chat_background_container.setBackgroundColor(getResources().getColor(R.color.white));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setColor();
     }
 }
