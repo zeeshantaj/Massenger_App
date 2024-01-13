@@ -1,99 +1,450 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:background">
+    android:background="@color/white">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/place_holder"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/settingUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="User Name"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:singleLine="true"
-                android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-                app:layout_constraintStart_toEndOf="@+id/circleImageView"
-                app:layout_constraintTop_toTopOf="@+id/circleImageView" />
-
-            <TextView
-                android:id="@+id/settingStatusTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hey there i am using messenger"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:singleLine="true"
-                android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-                app:layout_constraintStart_toStartOf="@+id/settingUserName"
-                app:layout_constraintTop_toBottomOf="@+id/settingUserName" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.4dp"
-            android:background="@color/black"
-            android:layout_marginTop="20sp"/>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-
-            <RelativeLayout
+            android:layout_height="0dp"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settingProfileLay"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/acImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/phone_icon"
-                    android:padding="20sp"/>
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/place_holder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <TextView
-                    android:id="@+id/acTxt"
+                    android:id="@+id/settingUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Account"
-                    android:textSize="18sp"
+                    android:layout_marginStart="5dp"
+                    android:text="User Name"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_toEndOf="@+id/acImg"/>
+                    android:textSize="20sp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+                    app:layout_constraintStart_toEndOf="@+id/circleImageView"
+                    app:layout_constraintTop_toTopOf="@+id/circleImageView" />
+
                 <TextView
+                    android:id="@+id/settingStatusTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Security notification, change\nnumber"
+                    android:text="hey there i am using messenger"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
-                    android:textColor="@color/black"
-                    android:layout_below="@+id/acTxt"
-                    android:layout_toEndOf="@id/acImg"/>
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
+                    app:layout_constraintStart_toStartOf="@+id/settingUserName"
+                    app:layout_constraintTop_toBottomOf="@+id/settingUserName" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:background="@color/black"
+                android:layout_marginTop="20sp"/>
 
-    </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/accountCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/acImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/key_icon"
+                        android:padding="20dp"/>
+                    <TextView
+                        android:id="@+id/acTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Account"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/acImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Security notification, change\nnumber"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/acTxt"
+                        android:layout_toEndOf="@id/acImg"/>
 
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/privacyCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/prImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/lock_icon"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/prTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Privacy"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/prImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Block contacts, disappearing\nmessages"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/prTxt"
+                        android:layout_toEndOf="@id/prImg"/>
 
-</ScrollView>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/avatarCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/avImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/avatar_icon"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/avTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Avatar"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/avImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Create,edit,profile photo"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/avTxt"
+                        android:layout_toEndOf="@id/avImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/chatsCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/chatImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/chat_icon"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/chatTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chats"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/chatImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Message,group &amp; call history"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/chatTxt"
+                        android:layout_toEndOf="@id/chatImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/notificationCard"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/notiImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_notifications_24"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/notiTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notification"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/notiImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Message,group &amp; call tones"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/notiTxt"
+                        android:layout_toEndOf="@id/notiImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/storageCard"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/stoImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/storage_circle_icon"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/stoTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Storage and data"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/stoImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Network usage,auto-download"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/stoTxt"
+                        android:layout_toEndOf="@id/stoImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/applanguageCard"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/appLangImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_language_24"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/appLangTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="App Language"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/appLangImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="English (device's language"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/appLangTxt"
+                        android:layout_toEndOf="@id/appLangImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/helpCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:layout_marginTop="15dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/helpImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_help_outline_24"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/helpTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="App Language"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/helpImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="English (device's language"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/helpTxt"
+                        android:layout_toEndOf="@id/helpImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/inviteFrCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:layout_marginBottom="10dp"
+                app:cardElevation="0dp"
+                android:foreground="?android:selectableItemBackground"
+                app:cardBackgroundColor="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <ImageView
+                        android:id="@+id/inviteFrImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/invite_fr_icon"
+                        android:padding="20sp"/>
+                    <TextView
+                        android:id="@+id/inviteFrTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="App Language"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_toEndOf="@+id/inviteFrImg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="English (device's language"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyTxt"
+                        android:layout_below="@+id/inviteFrTxt"
+                        android:layout_toEndOf="@id/inviteFrImg"/>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="from\nZeeshan taj"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:padding="30dp"
+                android:layout_marginBottom="20sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

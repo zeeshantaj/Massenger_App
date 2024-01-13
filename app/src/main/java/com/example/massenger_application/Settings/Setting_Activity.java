@@ -3,11 +3,15 @@ package com.example.massenger_application.Settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.example.massenger_application.Login.Number_Verification_Fragment;
 import com.example.massenger_application.R;
 
 import java.util.Objects;
@@ -27,6 +31,7 @@ public class Setting_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         settingsFrameLay = findViewById(R.id.settingsFrameLay);
+      setFragment(new Settings_Home_Fragment());
     }
 
     @Override
@@ -37,7 +42,14 @@ public class Setting_Activity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void setFragment(){
-
+    private void setFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.settingsFrameLay,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+//        currentFragment = fragment;
+//        setColor();
+//        setToolbar();
     }
 }
