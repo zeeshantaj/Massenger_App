@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.massenger_application.FragmentUtil.FragmentUtils;
 import com.example.massenger_application.R;
 
 public class Settings_Home_Fragment extends Fragment {
@@ -27,18 +28,19 @@ public class Settings_Home_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         profileBtn = view.findViewById(R.id.settingProfileLay);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(new Setting_Profile_Fragment());
+                FragmentUtils.setFragment(fragmentManager,R.id.settingsFrameLay,new Setting_Profile_Fragment());
             }
         });
     }
-    private void setFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.settingsFrameLay, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+//    private void setFragment(Fragment fragment) {
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.settingsFrameLay, fragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//    }
 }

@@ -7,8 +7,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.example.massenger_application.FragmentUtil.FragmentUtils;
 import com.example.massenger_application.R;
 
 public class Setting_Profile_Fragment extends Fragment {
@@ -18,8 +21,10 @@ public class Setting_Profile_Fragment extends Fragment {
         return inflater.inflate(R.layout.setting_profile_fragment,container,false);
     }
 
-    @Override
+      @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
     }
 }
