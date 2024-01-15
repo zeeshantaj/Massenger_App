@@ -17,10 +17,13 @@ public class FirebaseUtils {
         return FirebaseFirestore.getInstance().collection("users").document(currentUserId());
     }
 
+
     public static CollectionReference allUserCollectionReference(){
         return FirebaseFirestore.getInstance().collection("users");
 
     }
+
+
 
     public static DocumentReference getChatRoomReference(String chatRoomId) {
         return FirebaseFirestore.getInstance().collection("chatrooms").document(chatRoomId);

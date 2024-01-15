@@ -11,6 +11,7 @@
         android:id="@+id/circleImageView2"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/place_holder"
         app:civ_border_color="@color/greyTxt"
         app:civ_border_width="0.2dp"
@@ -33,7 +34,7 @@
         app:tint="@color/white" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/userNameCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -98,7 +99,7 @@
                 android:layout_marginTop="5dp"
                 android:text="This is not your username or pin. This name\nwill be visible to your Messenger contacts"
                 android:textColor="@color/grey1"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -115,7 +116,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/statusCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -124,7 +125,7 @@
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
+        app:layout_constraintTop_toBottomOf="@+id/userNameCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -198,7 +199,7 @@
         android:layout_marginTop="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/statusCard">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
