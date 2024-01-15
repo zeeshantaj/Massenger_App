@@ -1,6 +1,7 @@
 package com.example.massenger_application.Chat;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,16 +30,34 @@ import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttp;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ChatActivity extends AppCompatActivity {
     private EditText messageEd;
@@ -47,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayout backBtn;
     private CircleImageView userImg;
     private TextView name,lastSeen;
-    private String receiverId;
+    private String receiverId,receiverFCMToken;
     private ChatRoom chatRoom;
     private String senderId,chatRoomId;
     private ChatRoomModel chatRoomModel;
@@ -108,6 +127,7 @@ public class ChatActivity extends AppCompatActivity {
 
           }
       });
+
       userInfo();
       initRecycler();
       CreateChatRoom();
@@ -132,14 +152,16 @@ public class ChatActivity extends AppCompatActivity {
         String img = intent.getStringExtra("image");
         String lastSeenStr = intent.getStringExtra("lastSeen");
         receiverId = intent.getStringExtra("associatedId");
-
+        receiverFCMToken = intent.getStringExtra("FCMToken");
+        Log.e("MyApp","RID intent"+receiverId);
         chatRoomId = FirebaseUtils.getChatRoomId(senderId,receiverId);
-        Log.e("MyApp","uiss"+senderId+"   "+receiverId);
+
         name.setText(nameStr);
         lastSeen.setText(lastSeenStr);
         Glide.with(this)
                 .load(img)
                 .into(userImg);
+
     }
     private void sendMessage(String message) {
 
@@ -155,6 +177,7 @@ public class ChatActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()){
                             messageEd.setText("");
+                            sendNotification(message);
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -164,6 +187,60 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private void sendNotification(String message) {
+        FirebaseUtils.currentUserDetails().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()){
+                    UserModel currentUser = task.getResult().toObject(UserModel.class);
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject notificationObject = new JSONObject();
+                        notificationObject.put("title",currentUser.getName());
+                        notificationObject.put("body",message);
+
+                        JSONObject dataObj = new JSONObject();
+                        dataObj.put("userId",currentUser.getAssociatedId());
+
+                        jsonObject.put("notification",notificationObject);
+                        jsonObject.put("data",dataObj);
+                        jsonObject.put("to",receiverFCMToken);
+                        callApi(jsonObject);
+
+                    }catch (Exception e){
+                        e.getLocalizedMessage();
+                    }
+                }
+                else {
+                    Log.e("MyApp","FCM ERROR "+task.getException());
+                }
+            }
+        });
+
+    }
+    void callApi(JSONObject jsonObject){
+        MediaType json = MediaType.get("application/json; charset=utf-8");
+        OkHttpClient client = new OkHttpClient();
+        String url = "https://fcm.googleapis.com/fcm/send";
+        RequestBody body = RequestBody.create(jsonObject.toString(),json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Authorization","Bearer AAAA7reCDoQ:APA91bHKOMdHeoUOtVUznGapVkZe27TYREQXUNAcON5FUepw3w_GOAer_ODZhNCmYC-ihXlagEojfs8dvj3DcWgeJqQpvYbxmRz8FMXWrb_b1keKYtRsv1agAC1fKnyiyJ1WWWKCO65F")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+            }
+        });
     }
 
     private void CreateChatRoom(){

@@ -64,6 +64,7 @@ public class UserChatsRecyclerAdapter extends FirestoreRecyclerAdapter<ChatRoomM
                                 intent.putExtra("image",users.getImage());
                                 intent.putExtra("associatedId",users.getAssociatedId());
                                 intent.putExtra("lastSeen",users.getLast_seen_status());
+                                intent.putExtra("FCMToken",users.getFCMToken());
                                 v.getContext().startActivity(intent);
                             }
                         });

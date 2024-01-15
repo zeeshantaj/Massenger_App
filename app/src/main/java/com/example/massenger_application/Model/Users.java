@@ -1,20 +1,29 @@
 package com.example.massenger_application.Model;
 
 public class Users {
-    private String associatedId,name,image,status,last_seen_status,phoneNumber;
+    private String associatedId,name,image,status,last_seen_status,phoneNumber,FCMToken;
 
     public Users() {
 
     }
 
 
-    public Users(String associatedId, String name, String image, String status, String last_seen_status,String phoneNumber) {
+    public Users(String associatedId, String name, String image, String status, String last_seen_status,String phoneNumber,String FCMToken) {
         this.associatedId = associatedId;
         this.name = name;
         this.image = image;
         this.status = status;
         this.last_seen_status = last_seen_status;
         this.phoneNumber = phoneNumber;
+        this.FCMToken = FCMToken;
+    }
+
+    public String getFCMToken() {
+        return FCMToken;
+    }
+
+    public void setFCMToken(String FCMToken) {
+        this.FCMToken = FCMToken;
     }
 
     public String getPhoneNumber() {

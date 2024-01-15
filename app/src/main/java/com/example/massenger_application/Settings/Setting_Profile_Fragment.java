@@ -81,7 +81,6 @@ public class Setting_Profile_Fragment extends Fragment {
         name = view.findViewById(R.id.textView2);
         status = view.findViewById(R.id.textView6);
         imageView = view.findViewById(R.id.circleImageView2);
-        number = view.findViewById(R.id.textView9);
         userNameCard = view.findViewById(R.id.userNameCard);
         statusCard = view.findViewById(R.id.statusCard);
 

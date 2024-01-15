@@ -138,36 +138,9 @@ public class Setup_Profile_Fragment extends Fragment {
                                     ShakeAnimation.setAnimation(getActivity(),userName);
                                     setup.setEnabled(true);
                                     Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                    Log.e("MyApp", "Error " + e.getLocalizedMessage());
+
                                 }
                             });
-//                            reference.setValue(value).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    Toast.makeText(getActivity(), "User created successfully", Toast.LENGTH_SHORT).show();
-//                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-//
-//                                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
-//                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//                                    editor.putString("shareName",name);
-//                                    editor.putString("shareImageUrl",image);
-//                                    editor.apply();
-//
-//                                    startActivity(intent);
-//                                    getActivity().finish();
-//                                }
-//                            }).addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    ShakeAnimation.setAnimation(getActivity(),profileImage);
-//                                    ShakeAnimation.setAnimation(getActivity(),userName);
-//                                    progressBar.setVisibility(View.GONE);
-//                                    setup.setEnabled(true);
-//                                    Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-//                                    Log.e("MyApp", "Error " + e.getLocalizedMessage());
-//                                }
-//                            });
 
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -177,7 +150,7 @@ public class Setup_Profile_Fragment extends Fragment {
                                 ShakeAnimation.setAnimation(getActivity(),userName);
                                 setup.setEnabled(true);
                                 Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                Log.e("MyApp", "Error " + e.getLocalizedMessage());
+
                             }
                         });
                     }
@@ -188,7 +161,6 @@ public class Setup_Profile_Fragment extends Fragment {
                         ShakeAnimation.setAnimation(getActivity(),profileImage);
                         ShakeAnimation.setAnimation(getActivity(),userName);
                         setup.setEnabled(true);
-                        Log.e("MyApp", "Error " + e.getLocalizedMessage());
                         Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

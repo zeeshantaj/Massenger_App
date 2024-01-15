@@ -2,40 +2,40 @@ package com.example.massenger_application.Chat;
 
 public class UserModel {
 
-    private String phone,userName,createdTimeStamp,image;
+    private String associatedId,name,message,image;
 
     public UserModel() {
     }
 
-    public UserModel(String phone, String userName, String createdTimeStamp, String image) {
-        this.phone = phone;
-        this.userName = userName;
-        this.createdTimeStamp = createdTimeStamp;
+    public UserModel(String associatedId, String name, String message, String image) {
+        this.associatedId = associatedId;
+        this.name = name;
+        this.message = message;
         this.image = image;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getAssociatedId() {
+        return associatedId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setAssociatedId(String associatedId) {
+        this.associatedId = associatedId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCreatedTimeStamp() {
-        return createdTimeStamp;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCreatedTimeStamp(String createdTimeStamp) {
-        this.createdTimeStamp = createdTimeStamp;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getImage() {
