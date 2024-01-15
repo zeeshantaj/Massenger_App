@@ -1,9 +1,19 @@
 package com.example.massenger_application.Utils;
 
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.example.massenger_application.Interfaces.ImageUrlCallback;
+import com.example.massenger_application.Model.Users;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -17,6 +27,31 @@ public class FirebaseUtils {
         return FirebaseFirestore.getInstance().collection("users").document(currentUserId());
     }
 
+    public static void getFirebaseName(final ImageUrlCallback callback) {
+        DocumentReference userRef = FirebaseUtils.currentUserDetails();
+
+        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Users users = documentSnapshot.toObject(Users.class);
+                if (users != null) {
+                    String imageUrl = users.getImage();
+                    String name = users.getName();
+                    String status = users.getStatus();
+
+                    callback.onImageUrlReady(imageUrl);
+                    callback.onNameReady(name);
+                    callback.onStatusReady(status);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Handle failure
+                callback.onImageUrlReady(null); // You might want to handle this case as well
+            }
+        });
+    }
 
     public static CollectionReference allUserCollectionReference(){
         return FirebaseFirestore.getInstance().collection("users");
