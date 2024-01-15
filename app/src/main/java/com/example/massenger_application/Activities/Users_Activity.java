@@ -64,37 +64,6 @@ public class Users_Activity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
 
-//        DatabaseReference databaseReference = FirebaseDatabase
-//                .getInstance()
-//                .getReference("Users");
-//
-//        databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                usersList.clear();
-//                if (snapshot.exists()){
-//                    for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-//                        String name = dataSnapshot.child("name").getValue(String.class);
-//                        String image = dataSnapshot.child("image").getValue(String.class);
-//                        String status = dataSnapshot.child("status").getValue(String.class);
-//                        String associatedID = dataSnapshot.child("associatedId").getValue(String.class);
-//                        String lastSeen = dataSnapshot.child("last_seen_status").getValue(String.class);
-//                        users = new Users(associatedID,name,image,status,lastSeen);
-//
-//                        Log.e("MyApp","name"+associatedID);
-//                    }
-//                    usersList.add(users);
-//                    UserAdapter adapter = new UserAdapter(usersList);
-//                    recyclerView.setAdapter(adapter);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(Users_Activity.this, "Error "+ error.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
     }
     private void setToolbar(){
         Toolbar toolbar = findViewById(R.id.userToolbar);
@@ -110,6 +79,8 @@ public class Users_Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
+
     }
 }
