@@ -1,10 +1,12 @@
 package com.example.massenger_application.Settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,16 +49,16 @@ public class Settings_Home_Fragment extends Fragment {
                 FragmentUtils.setFragment(fragmentManager,R.id.settingsFrameLay,new Setting_Profile_Fragment());
             }
         });
-        setProfileInfo();
+        setProfileInfo(getActivity(),circleImageView,nameStr,statusStr);
     }
-    private void setProfileInfo(){
+    public static void setProfileInfo(Context context, CircleImageView imageView, TextView nameStr, TextView statusStr){
 
         FirebaseUtils.getFirebaseName(new ImageUrlCallback() {
             @Override
             public void onImageUrlReady(String imageUrl) {
-                Glide.with(getActivity())
+                Glide.with(context)
                         .load(imageUrl)
-                        .into(circleImageView);
+                        .into(imageView);
             }
 
             @Override

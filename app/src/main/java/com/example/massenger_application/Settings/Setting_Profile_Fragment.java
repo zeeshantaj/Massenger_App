@@ -1,5 +1,7 @@
 package com.example.massenger_application.Settings;
 
+import static com.example.massenger_application.Settings.Settings_Home_Fragment.setProfileInfo;
+
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,38 +58,15 @@ public class Setting_Profile_Fragment extends Fragment {
         userNameCard = view.findViewById(R.id.userNameCard);
         statusCard = view.findViewById(R.id.statusCard);
 
-          DocumentReference userRef = FirebaseUtils.currentUserDetails();
-          userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-              @Override
-              public void onSuccess(DocumentSnapshot documentSnapshot) {
-                  Users users = documentSnapshot.toObject(Users.class);
-                  if (users != null) {
-                      name.setText(users.getName());
-                      status.setText(users.getStatus());
-                      number.setText(users.getPhoneNumber());
-                      Glide.with(getActivity())
-                              .load(users.getImage())
-                              .into(imageView);
-                  }
-                  else {
-                      Toast.makeText(getActivity(), "User is not exist", Toast.LENGTH_SHORT).show();
-                  }
-              }
-          }).addOnFailureListener(new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull Exception e) {
-                  Toast.makeText(getActivity(), "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-              }
-          });
-
-
           userNameCard.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
                   showCustomSaveDialog();
               }
           });
+          setProfileInfo(getActivity(),imageView,name,status);
       }
+
     private void showCustomSaveDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View dialogView = getLayoutInflater().inflate(R.layout.name_bottom_dialogue, null);
