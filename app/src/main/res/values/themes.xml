@@ -6,6 +6,11 @@
         <item name="background">@color/white</item>
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
 
     <style name="Theme.Massenger_Application" parent="Base.Theme.Massenger_Application" />
     <style name="OutlinedBoxStyle_Normal" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

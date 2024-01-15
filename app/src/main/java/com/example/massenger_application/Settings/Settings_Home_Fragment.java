@@ -36,11 +36,4 @@ public class Settings_Home_Fragment extends Fragment {
             }
         });
     }
-//    private void setFragment(Fragment fragment) {
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.settingsFrameLay, fragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
 }
