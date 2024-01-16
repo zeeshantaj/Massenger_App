@@ -1,76 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/cardGrey"
+    app:layoutDescription="@xml/activity_other_user_profile_scene"
     tools:context=".Activities.Other_User_ProfileActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
-        android:layout_width="match_parent"
-        android:layout_height="?android:actionBarSize"
-        android:background="@android:color/transparent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/OtherUserProfileImg"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/place_holder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+    <TextView
+        android:id="@+id/otherProfileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardGrey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/place_holder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/profileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="zohaib warid"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@+id/circleImageView"
-            app:layout_constraintStart_toStartOf="@+id/circleImageView"
-            app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+923002307075"
-            android:textColor="@color/greyTxt"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/profileName"
-            app:layout_constraintStart_toStartOf="@+id/profileName"
-            app:layout_constraintTop_toBottomOf="@+id/profileName" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="last seen status"
-            android:textColor="@color/greyTxt"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        android:background="@color/cardGrey"
+        android:text="zohaib warid"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/OtherUserProfileImg" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView2"
@@ -81,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileName">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,6 +45,28 @@
             android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
 
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cardGrey"
+                android:text="+923002307075"
+                android:textAlignment="center"
+                android:textColor="@color/greyTxt"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cardGrey"
+                android:paddingBottom="10dp"
+                android:text="last seen status"
+                android:textAlignment="center"
+                android:textColor="@color/greyTxt"
+                android:textSize="18sp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,6 +80,7 @@
                     android:orientation="vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,16 +88,18 @@
                         android:text="Hey there i am using messenger"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:text="24 October 2020"
-                        android:textSize="16sp"
                         android:textColor="@color/greyTxt"
-                        android:layout_marginStart="10dp"/>
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +113,7 @@
                     android:orientation="vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -143,6 +125,7 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -156,20 +139,24 @@
                     android:orientation="vertical"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:weightSum="2">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mute notification"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
-                            android:layout_weight="1"
                             android:layout_marginStart="20dp"
+                            android:layout_weight="1"
+                            android:drawablePadding="20dp"
+                            android:text="Mute notification"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
                             app:drawableStartCompat="@drawable/baseline_notifications_24" />
+
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/swOnOff"
                             android:layout_width="wrap_content"
@@ -184,44 +171,51 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:track="@drawable/custom_track" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp"
 
-                        android:layout_marginTop="20sp">
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Custom notification"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
                             android:layout_marginStart="20dp"
+                            android:drawablePadding="20dp"
+                            android:text="Custom notification"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
                             app:drawableStartCompat="@drawable/baseline_notifications_24" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginTop="20sp">
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Media visibity"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
                             android:layout_marginStart="20dp"
+                            android:drawablePadding="20dp"
+                            android:text="Media visibity"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
                             app:drawableStartCompat="@drawable/baseline_notifications_24" />
 
                     </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="4dp"
                 app:cardBackgroundColor="@color/cardGrey"
                 app:cardElevation="0dp">
@@ -233,66 +227,155 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
+                        android:layout_marginTop="20sp"
+                        android:orientation="vertical">
 
-                        android:layout_marginTop="20sp">
+                        <ImageView
+                            android:id="@+id/lc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/lock_icon" />
+
                         <TextView
+                            android:id="@+id/tx1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Custom notification"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
-                            android:layout_marginStart="20dp"
-                            app:drawableStartCompat="@drawable/baseline_notifications_24" />
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/lc"
+                            android:text="Encryption"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="20sp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Media visibity"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
-                            android:layout_marginStart="20dp"
-                            app:drawableStartCompat="@drawable/baseline_notifications_24" />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mute notification"
-                            android:drawablePadding="20dp"
-                            android:textSize="22sp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="20dp"
-                            app:drawableStartCompat="@drawable/baseline_notifications_24" />
+                            android:layout_below="@+id/tx1"
+                            android:layout_alignStart="@+id/tx1"
+                            android:text="Messages and calls are end-to-end\nencrypted. Tap to verify"
+                            android:textColor="@color/greyTxt"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20sp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/lc1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/lock_icon" />
+
+                        <TextView
+                            android:id="@+id/tx2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/lc1"
+                            android:text="Disappearing messages"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tx2"
+                            android:layout_alignStart="@+id/tx2"
+                            android:text="Off"
+                            android:textColor="@color/greyTxt"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:paddingBottom="15dp">
+
+                        <ImageView
+                            android:id="@+id/lc3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/lock_icon" />
+
+                        <TextView
+                            android:id="@+id/tx3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_toEndOf="@+id/lc3"
+                            android:text="Chat lock"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tx3"
+                            android:layout_alignStart="@+id/tx3"
+                            android:text="Lock and hide this chat on \nthis device."
+                            android:textColor="@color/greyTxt"
+                            android:textSize="16sp" />
+
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/swOnOff1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
                             android:layout_gravity="center"
                             android:layout_marginEnd="10dp"
-                            android:layout_weight="1"
+                            android:checked="true"
                             android:textSize="20sp"
                             android:thumb="@drawable/custom_thumb"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:track="@drawable/custom_track" />
-                    </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:cardBackgroundColor="@color/cardGrey"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="20dp"
+                        android:padding="10dp"
+                        android:text="Block User Name"
+                        android:textColor="@color/red"
+                        android:textSize="20sp"
+                        app:drawableStartCompat="@drawable/baseline_help_outline_24"
+                        app:drawableTint="@color/red" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="20dp"
+                        android:padding="10dp"
+                        android:text="Report User Name"
+                        android:textColor="@color/red"
+                        android:textSize="20sp"
+                        app:drawableStartCompat="@drawable/baseline_help_outline_24"
+                        app:drawableTint="@color/red" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -301,5 +384,25 @@
     </androidx.core.widget.NestedScrollView>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/otherProfileBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:foreground="@drawable/phone_foreground_bg"
+            android:src="@drawable/back_arrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
