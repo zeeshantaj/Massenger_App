@@ -132,7 +132,9 @@ public class ChatActivity extends AppCompatActivity {
       });
 
       otherPersonProfileLinearLay.setOnClickListener(v -> {
-          startActivity(new Intent(ChatActivity.this, Other_User_ProfileActivity.class));
+          Intent intent = new Intent(this,Other_User_ProfileActivity.class);
+          intent.putExtra("otherUserId",receiverId);
+          startActivity(intent);
       });
 
       userInfo();
