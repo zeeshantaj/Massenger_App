@@ -57,9 +57,9 @@ public class UserAdapter extends FirestoreRecyclerAdapter<Users, UserAdapter.Vie
             }
         });
 
-        if (users.getAssociatedId() != null && users.getAssociatedId().equals(FirebaseUtils.currentUserId())){
-            getSnapshots().getSnapshot(position).getReference().delete();
-        }
+//        if (users.getAssociatedId() != null && users.getAssociatedId().equals(FirebaseUtils.currentUserId())){
+//            getSnapshots().getSnapshot(position).getReference().delete();
+//        }
 
 
     }

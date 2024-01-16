@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.massenger_application.Activities.Other_User_ProfileActivity;
 import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
@@ -72,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatRoomModel chatRoomModel;
     private ImageView menuItemBtn;
     private ConstraintLayout chat_background_container;
+    private LinearLayout otherPersonProfileLinearLay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
         name = findViewById(R.id.chat_name);
         userImg = findViewById(R.id.chat_img);
         cameraImg = findViewById(R.id.cameraImg);
+        otherPersonProfileLinearLay = findViewById(R.id.otherPersonProfileLinearLay);
         chat_background_container = findViewById(R.id.chat_background_container);
         backBtn = findViewById(R.id.backLinearLayout);
         menuItemBtn = findViewById(R.id.chat_menuItem);
@@ -126,6 +129,10 @@ public class ChatActivity extends AppCompatActivity {
               sendMessage(message);
 
           }
+      });
+
+      otherPersonProfileLinearLay.setOnClickListener(v -> {
+          startActivity(new Intent(ChatActivity.this, Other_User_ProfileActivity.class));
       });
 
       userInfo();

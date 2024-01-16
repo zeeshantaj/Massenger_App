@@ -52,10 +52,12 @@
             android:id="@+id/otherPersonProfileLinearLay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:foreground="?android:selectableItemBackground"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/backLinearLayout"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/backLinearLayout"
             app:layout_constraintTop_toTopOf="@+id/backLinearLayout">
 
