@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.massenger_application.R;
+import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +33,14 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
             holder.receiverLayout.setVisibility(View.GONE);
             holder.senderLayout.setVisibility(View.VISIBLE);
             holder.sentText.setText(model.getMessage());
+            holder.msgSndTime.setText(FirebaseUtils.getTimestampToString(model.getTimestamp()));
 
         }
         else {
             holder.senderLayout.setVisibility(View.GONE);
             holder.receiverLayout.setVisibility(View.VISIBLE);
             holder.receivedText.setText(model.getMessage());
+            holder.msgSndTime.setText(FirebaseUtils.getTimestampToString(model.getTimestamp()));
         }
     }
 
@@ -50,13 +53,14 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout receiverLayout,senderLayout;
-        private TextView receivedText,sentText;
+        private TextView receivedText,sentText,msgSndTime;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             receiverLayout = itemView.findViewById(R.id.received_chat_layout);
             receivedText = itemView.findViewById(R.id.received_chat_text);
             senderLayout = itemView.findViewById(R.id.sendder_chat_layout);
             sentText = itemView.findViewById(R.id.sender_chat_text);
+            msgSndTime = itemView.findViewById(R.id.messageSendTime);
         }
     }
 }
