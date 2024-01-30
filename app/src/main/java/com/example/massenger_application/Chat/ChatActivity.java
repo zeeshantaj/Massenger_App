@@ -1,5 +1,7 @@
 package com.example.massenger_application.Chat;
 
+import static com.example.massenger_application.Utils.FirebaseUtils.currentUserId;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +51,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
@@ -104,6 +108,8 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+               FirebaseUtils.updateCurrentStatus("typing");
 
             }
 
@@ -166,11 +172,33 @@ public class ChatActivity extends AppCompatActivity {
         chatRoomId = FirebaseUtils.getChatRoomId(senderId,receiverId);
 
         name.setText(nameStr);
-        lastSeen.setText(lastSeenStr);
+        //lastSeen.setText(lastSeenStr);
         Glide.with(this)
                 .load(img)
                 .into(userImg);
 
+    }
+    private void setLastSeen(){
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firestore.collection("users").document(currentUserId());
+
+        documentReference.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Document exists, you can retrieve the data
+                            String lastSeenStatus = documentSnapshot.getString("last_seen_status");
+
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle errors
+                    }
+                });
     }
     private void sendMessage(String message) {
 

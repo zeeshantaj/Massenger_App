@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseUtils.updateCurrentStatus("online");
         getStatus();
         initRecycler();
     }
@@ -133,22 +134,11 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
         String formattedTime = sdf.format(currentTime);
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String uid = firebaseAuth.getUid();
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
         HashMap<String, Object> updateData = new HashMap<>();
         updateData.put("last_seen_status", formattedTime);
-        databaseReference.updateChildren(updateData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MainActivity.this, "Error "+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        FirebaseUtils.updateCurrentStatus(formattedTime);
+
     }
+
 }

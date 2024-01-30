@@ -1,5 +1,6 @@
 package com.example.massenger_application.Utils;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FirebaseUtils {
     public static String currentUserId(){
@@ -89,5 +92,17 @@ public class FirebaseUtils {
         }else {
             return userId2 +"_"+userId1;
         }
+    }
+    public static void updateCurrentStatus(String status){
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("last_seen_status",status);
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firestore.collection("users").document(currentUserId());
+        documentReference.update(updates).addOnSuccessListener(unused -> {
+            Log.e("MyApp","update current status updated");
+        }).addOnFailureListener(e -> {
+            Log.e("MyApp","update current status "+e.getLocalizedMessage());
+        });
     }
 }
