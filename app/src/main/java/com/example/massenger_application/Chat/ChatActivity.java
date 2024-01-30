@@ -148,6 +148,7 @@ public class ChatActivity extends AppCompatActivity {
       CreateChatRoom();
       setMenuItem();
       setColor();
+      setLastSeen();
     }
 
     private void setIconVisibility(){
@@ -189,7 +190,8 @@ public class ChatActivity extends AppCompatActivity {
                         if (documentSnapshot.exists()) {
                             // Document exists, you can retrieve the data
                             String lastSeenStatus = documentSnapshot.getString("last_seen_status");
-
+                            lastSeen.setText(lastSeenStatus);
+                            Log.e("MyApp","status retrieved");
                         }
                     }
                 })
@@ -197,6 +199,7 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         // Handle errors
+                        Log.e("MyApp","status retrieve  "+e.getLocalizedMessage());
                     }
                 });
     }

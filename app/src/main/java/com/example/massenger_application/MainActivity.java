@@ -129,15 +129,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Date currentTime = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
         String formattedTime = sdf.format(currentTime);
 
-        HashMap<String, Object> updateData = new HashMap<>();
-        updateData.put("last_seen_status", formattedTime);
-
         FirebaseUtils.updateCurrentStatus(formattedTime);
+        super.onDestroy();
+
 
     }
 
