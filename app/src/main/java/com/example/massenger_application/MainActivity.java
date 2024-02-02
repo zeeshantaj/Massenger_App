@@ -129,11 +129,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        Date currentTime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
-        String formattedTime = sdf.format(currentTime);
-
-        FirebaseUtils.updateCurrentStatus(formattedTime);
+//        Date currentTime = new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
+//        String formattedTime = sdf.format(currentTime);
+//
+//        FirebaseUtils.updateCurrentStatus(formattedTime);
         super.onDestroy();
 
 

@@ -105,4 +105,5 @@ public class FirebaseUtils {
             Log.e("MyApp","update current status "+e.getLocalizedMessage());
         });
     }
+
 }

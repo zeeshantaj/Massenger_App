@@ -43,6 +43,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
@@ -71,6 +72,8 @@ public class ChatActivity extends AppCompatActivity {
     private LinearLayout backBtn;
     private CircleImageView userImg;
     private TextView name,lastSeen;
+    private ListenerRegistration listenerRegistration;
+
     private String receiverId,receiverFCMToken;
     private ChatRoom chatRoom;
     private String senderId,chatRoomId;
@@ -109,7 +112,12 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-               FirebaseUtils.updateCurrentStatus("typing");
+               if (count > 0){
+                   FirebaseUtils.updateCurrentStatus("typing");
+               }
+               else {
+                   FirebaseUtils.updateCurrentStatus("online");
+               }
 
             }
 
@@ -180,29 +188,70 @@ public class ChatActivity extends AppCompatActivity {
 
     }
     private void setLastSeen(){
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firestore.collection("users").document(currentUserId());
+//        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+//        DocumentReference documentReference = firestore.collection("users").document(receiverId);
+//
+//        documentReference.get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        if (documentSnapshot.exists()) {
+//                            // Document exists, you can retrieve the data
+//                            String lastSeenStatus = documentSnapshot.getString("last_seen_status");
+//                            lastSeen.setText(lastSeenStatus);
+//                            Log.e("MyApp","status retrieved");
+//                        }
+//                    }
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        // Handle errors
+//                        Log.e("MyApp","status retrieve  "+e.getLocalizedMessage());
+//                    }
+//                });
 
-        documentReference.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Document exists, you can retrieve the data
-                            String lastSeenStatus = documentSnapshot.getString("last_seen_status");
-                            lastSeen.setText(lastSeenStatus);
-                            Log.e("MyApp","status retrieved");
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Handle errors
-                        Log.e("MyApp","status retrieve  "+e.getLocalizedMessage());
-                    }
-                });
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firestore.collection("users").document(receiverId);
+
+        // Use addSnapshotListener to listen for real-time updates
+        listenerRegistration = documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    // Handle errors
+                    Log.e("MyApp", "Error listening for real-time updates: " + e.getLocalizedMessage());
+                    return;
+                }
+
+                if (documentSnapshot != null && documentSnapshot.exists()) {
+                    // Document exists, you can retrieve the data
+                    String lastSeenStatus = documentSnapshot.getString("last_seen_status");
+                    lastSeen.setText(lastSeenStatus);
+                    Log.e("MyApp", "Status retrieved");
+                }
+            }
+        });
+
     }
+    private void stopListening() {
+        if (listenerRegistration != null) {
+            listenerRegistration.remove();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopListening();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopListening();
+    }
+
     private void sendMessage(String message) {
 
         chatRoomModel.setLastMessageTimeStamp(Timestamp.now());
