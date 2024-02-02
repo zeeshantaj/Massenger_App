@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.massenger_application.Activities.Users_Activity;
 import com.example.massenger_application.Chat.ChatRoomModel;
 import com.example.massenger_application.Home.UserChatsRecyclerAdapter;
+import com.example.massenger_application.Service.UpdateStatusService;
 import com.example.massenger_application.Settings.Setting_Activity;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -59,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUtils.updateCurrentStatus("online");
         getStatus();
         initRecycler();
+        startUpdateStatusService();
     }
-
+    private void startUpdateStatusService() {
+        Intent serviceIntent = new Intent(this, UpdateStatusService.class);
+        startService(serviceIntent);
+    }
     private void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
 
@@ -135,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        FirebaseUtils.updateCurrentStatus(formattedTime);
         super.onDestroy();
+        startUpdateStatusService();
 
 
     }
