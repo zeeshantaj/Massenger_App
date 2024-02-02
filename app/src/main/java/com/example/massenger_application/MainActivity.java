@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -18,25 +17,15 @@ import android.widget.Toast;
 import com.example.massenger_application.Activities.Users_Activity;
 import com.example.massenger_application.Chat.ChatRoomModel;
 import com.example.massenger_application.Home.UserChatsRecyclerAdapter;
-import com.example.massenger_application.Service.UpdateStatusService;
+import com.example.massenger_application.StatusService.UpdateStatusService;
 import com.example.massenger_application.Settings.Setting_Activity;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,12 +49,9 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUtils.updateCurrentStatus("online");
         getStatus();
         initRecycler();
-        startUpdateStatusService();
+        //startUpdateStatusService();
     }
-    private void startUpdateStatusService() {
-        Intent serviceIntent = new Intent(this, UpdateStatusService.class);
-        startService(serviceIntent);
-    }
+
     private void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.mainRecyclerView);
 
@@ -140,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        FirebaseUtils.updateCurrentStatus(formattedTime);
         super.onDestroy();
-        startUpdateStatusService();
+        //startUpdateStatusService();
 
 
     }

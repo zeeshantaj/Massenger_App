@@ -128,6 +128,7 @@ public class Setup_Profile_Fragment extends Fragment {
                                     Toast.makeText(getActivity(), "User Created Successfully", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
                                     startActivity(intent);
+
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override

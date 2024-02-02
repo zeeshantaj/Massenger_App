@@ -1,4 +1,4 @@
-package com.example.massenger_application.Service;
+package com.example.massenger_application.StatusService;
 
 import android.app.Service;
 import android.content.Intent;
@@ -25,7 +25,7 @@ public class UpdateStatusService extends Service {
     private void updateFirestoreStatus() {
         Date currentTime = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy hh:mm:a", Locale.getDefault());
-        String formattedTime = sdf.format(currentTime);
+        String formattedTime = sdf.format("last seen"+currentTime);
 
         FirebaseUtils.updateCurrentStatus(formattedTime);
     }

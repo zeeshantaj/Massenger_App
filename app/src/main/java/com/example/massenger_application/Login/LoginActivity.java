@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = auth.getCurrentUser();
         if (user != null){
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
         else {
             fragmentManager = getSupportFragmentManager();
