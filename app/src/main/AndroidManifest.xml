@@ -50,7 +50,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".StatusService.UpdateStatusService"/>
+        <service
+            android:name=".Application.UpdateStatusService"
+            android:exported="false"/>
     </application>
 
 </manifest>

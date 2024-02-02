@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.example.massenger_application.Activities.Users_Activity;
 import com.example.massenger_application.Chat.ChatRoomModel;
 import com.example.massenger_application.Home.UserChatsRecyclerAdapter;
-import com.example.massenger_application.StatusService.UpdateStatusService;
 import com.example.massenger_application.Settings.Setting_Activity;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
