@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Massenger_Application"
         tools:targetApi="31">
         <activity
+            android:name=".VoiceCall.Voice_Call_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.Other_User_ProfileActivity"
             android:exported="false" />
         <activity
@@ -52,7 +55,7 @@
         </service>
         <service
             android:name=".Application.UpdateStatusService"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

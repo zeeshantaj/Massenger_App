@@ -30,6 +30,7 @@ import com.example.massenger_application.Activities.Other_User_ProfileActivity;
 import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
+import com.example.massenger_application.VoiceCall.Voice_Call_Activity;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -81,6 +82,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView menuItemBtn;
     private ConstraintLayout chat_background_container;
     private LinearLayout otherPersonProfileLinearLay;
+    private ImageView voiceCallBtn ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,7 @@ public class ChatActivity extends AppCompatActivity {
         messageEd = findViewById(R.id.chatEd);
         sendBtn = findViewById(R.id.sendBtn);
         lastSeen = findViewById(R.id.chat_lastSeen);
+        voiceCallBtn = findViewById(R.id.imageView2);
         name = findViewById(R.id.chat_name);
         userImg = findViewById(R.id.chat_img);
         cameraImg = findViewById(R.id.cameraImg);
@@ -150,6 +153,9 @@ public class ChatActivity extends AppCompatActivity {
           intent.putExtra("otherUserId",receiverId);
           startActivity(intent);
       });
+      voiceCallBtn.setOnClickListener(v -> {
+          startActivity(new Intent(this, Voice_Call_Activity.class));
+      });
 
       userInfo();
       initRecycler();
@@ -158,6 +164,7 @@ public class ChatActivity extends AppCompatActivity {
       setColor();
       setLastSeen();
     }
+
 
     private void setIconVisibility(){
         if (!messageEd.getText().toString().isEmpty()){
