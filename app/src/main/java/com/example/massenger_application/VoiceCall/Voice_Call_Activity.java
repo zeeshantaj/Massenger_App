@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -11,7 +12,11 @@ import android.widget.Toast;
 
 import com.example.massenger_application.R;
 import com.zegocloud.uikit.ZegoUIKit;
+import com.zegocloud.uikit.prebuilt.call.config.ZegoNotificationConfig;
 import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationService;
+
+import timber.log.Timber;
 
 public class Voice_Call_Activity extends AppCompatActivity {
 
@@ -58,15 +63,17 @@ public class Voice_Call_Activity extends AppCompatActivity {
             Toast.makeText(this, "Call Ended", Toast.LENGTH_SHORT).show();
             finish();
         });
+
+        Intent intent = getIntent();
+        String targetedId = intent.getStringExtra("otherUserId");
+        Timber.tag("MyApp").e("uid" + targetedId);
+
+
     }
-    private void startService(String userID){
-        Application application = getApplication();
-        long appId =;
-        String appSign =;
-        String userName = userID;
 
-        ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
-        callInvitationConfig.
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ZegoUIKitPrebuiltCallInvitationService.unInit();
     }
 }

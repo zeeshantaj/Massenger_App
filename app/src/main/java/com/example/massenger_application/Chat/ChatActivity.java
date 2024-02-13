@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -48,11 +49,19 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
+import com.zegocloud.uikit.prebuilt.call.config.ZegoNotificationConfig;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationService;
+import com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton;
+import com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoVoiceCallButton;
+import com.zegocloud.uikit.service.defines.ZegoUIKitUser;
 
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -82,7 +91,9 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView menuItemBtn;
     private ConstraintLayout chat_background_container;
     private LinearLayout otherPersonProfileLinearLay;
-    private ImageView voiceCallBtn ;
+    //private ImageView voiceCallBtn;
+    //private ZegoVoiceCallButton voiceCallBtn;
+    private ZegoSendCallInvitationButton voiceCallBtn,videoCall;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,7 +165,10 @@ public class ChatActivity extends AppCompatActivity {
           startActivity(intent);
       });
       voiceCallBtn.setOnClickListener(v -> {
-          startActivity(new Intent(this, Voice_Call_Activity.class));
+//          Intent intent = new Intent(this, Voice_Call_Activity.class);
+//          intent.putExtra("otherUserId",receiverId);
+//          startActivity(intent);
+          setVoiceCall(receiverId);
       });
 
       userInfo();
@@ -163,9 +177,31 @@ public class ChatActivity extends AppCompatActivity {
       setMenuItem();
       setColor();
       setLastSeen();
+
+      startService(senderId);
     }
 
+    private void setVoiceCall(String targetedId){
+        voiceCallBtn.setIsVideoCall(false);
+        voiceCallBtn.setResourceID("zego_uikit_call");
+        voiceCallBtn.setInvitees(Collections.singletonList(new ZegoUIKitUser(targetedId)));
+    }
 
+    private void startService(String userID){
+        Application application = getApplication();
+        long appId =1453071286;
+        String appSign ="3d5332b2094993b3adf3a8899e06ecff8f6d7242d773ff9581446c715e4163fb";
+        String userName = userID;
+
+        ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
+        ZegoNotificationConfig notificationConfig = new ZegoNotificationConfig();
+        notificationConfig.sound = "zego_uikit_sound_call";
+        notificationConfig.channelID = "CallInvitaion";
+        notificationConfig.channelName = "CallInvitaion";
+        ZegoUIKitPrebuiltCallInvitationService.init(getApplication(),appId,appSign,userID,userName,callInvitationConfig);
+
+
+    }
     private void setIconVisibility(){
         if (!messageEd.getText().toString().isEmpty()){
             sendBtn.setImageResource(R.drawable.send_icon);
