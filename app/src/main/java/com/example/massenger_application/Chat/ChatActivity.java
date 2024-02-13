@@ -101,6 +101,7 @@ public class ChatActivity extends AppCompatActivity {
         messageEd = findViewById(R.id.chatEd);
         sendBtn = findViewById(R.id.sendBtn);
         lastSeen = findViewById(R.id.chat_lastSeen);
+
         voiceCallBtn = findViewById(R.id.imageView2);
         name = findViewById(R.id.chat_name);
         userImg = findViewById(R.id.chat_img);
