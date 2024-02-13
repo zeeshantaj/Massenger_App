@@ -64,9 +64,9 @@ public class Voice_Call_Activity extends AppCompatActivity {
             finish();
         });
 
-        Intent intent = getIntent();
-        String targetedId = intent.getStringExtra("otherUserId");
-        Timber.tag("MyApp").e("uid" + targetedId);
+//        Intent intent = getIntent();
+//        String targetedId = intent.getStringExtra("otherUserId");
+//        Timber.tag("MyApp").e("uid" + targetedId);
 
 
     }
