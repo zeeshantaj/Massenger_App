@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.massenger_application.Activities.Other_User_ProfileActivity;
 import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
+import com.example.massenger_application.Interfaces.ImageUrlCallback;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.example.massenger_application.VoiceCall.Voice_Call_Activity;
@@ -74,6 +75,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import timber.log.Timber;
 
 public class ChatActivity extends AppCompatActivity {
     private EditText messageEd;
@@ -94,6 +96,7 @@ public class ChatActivity extends AppCompatActivity {
     //private ImageView voiceCallBtn;
     //private ZegoVoiceCallButton voiceCallBtn;
     private ZegoSendCallInvitationButton voiceCallBtn,videoCall;
+    private String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,7 +182,10 @@ public class ChatActivity extends AppCompatActivity {
       setColor();
       setLastSeen();
 
-      startService(senderId);
+
+
+      startService(senderId,userName);
+      Log.e("MyApp","name"+userName);
     }
 
     private void setVoiceCall(String targetedId){
@@ -188,18 +194,17 @@ public class ChatActivity extends AppCompatActivity {
         voiceCallBtn.setInvitees(Collections.singletonList(new ZegoUIKitUser(targetedId)));
     }
 
-    private void startService(String userID){
+    private void startService(String userID,String userName){
         Application application = getApplication();
         long appId =1453071286;
         String appSign ="3d5332b2094993b3adf3a8899e06ecff8f6d7242d773ff9581446c715e4163fb";
-        String userName = userID;
 
         ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
         ZegoNotificationConfig notificationConfig = new ZegoNotificationConfig();
         notificationConfig.sound = "zego_uikit_sound_call";
-        notificationConfig.channelID = "CallInvitaion";
-        notificationConfig.channelName = "CallInvitaion";
-        ZegoUIKitPrebuiltCallInvitationService.init(getApplication(),appId,appSign,userID,userName,callInvitationConfig);
+        notificationConfig.channelID = "CallInvitation";
+        notificationConfig.channelName = "CallInvitation";
+        ZegoUIKitPrebuiltCallInvitationService.init(getApplication(),appId,appSign,userID,userID,callInvitationConfig);
 
 
     }
