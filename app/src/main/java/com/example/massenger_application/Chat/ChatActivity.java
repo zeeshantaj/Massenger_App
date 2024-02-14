@@ -106,6 +106,7 @@ public class ChatActivity extends AppCompatActivity {
         lastSeen = findViewById(R.id.chat_lastSeen);
 
         voiceCallBtn = findViewById(R.id.imageView2);
+        videoCall = findViewById(R.id.imageView3);
         name = findViewById(R.id.chat_name);
         userImg = findViewById(R.id.chat_img);
         cameraImg = findViewById(R.id.cameraImg);
@@ -168,13 +169,9 @@ public class ChatActivity extends AppCompatActivity {
           intent.putExtra("otherUserId",receiverId);
           startActivity(intent);
       });
-      voiceCallBtn.setOnClickListener(v -> {
-//          Intent intent = new Intent(this, Voice_Call_Activity.class);
-//          intent.putExtra("otherUserId",receiverId);
-//          startActivity(intent);
-          setVoiceCall(receiverId);
-      });
 
+      setVoiceCall(receiverId);
+      setVideoCall(receiverId);
       userInfo();
       initRecycler();
       CreateChatRoom();
@@ -184,8 +181,9 @@ public class ChatActivity extends AppCompatActivity {
 
 
 
-      startService(senderId,userName);
+      startService(senderId);
       Log.e("MyApp","name"+userName);
+
     }
 
     private void setVoiceCall(String targetedId){
@@ -193,8 +191,14 @@ public class ChatActivity extends AppCompatActivity {
         voiceCallBtn.setResourceID("zego_uikit_call");
         voiceCallBtn.setInvitees(Collections.singletonList(new ZegoUIKitUser(targetedId)));
     }
+    private void setVideoCall(String targetedId){
+//        videoCall.setIsVideoCall(true);
+//        videoCall.setResourceID("zego_uikit_call");
+//        videoCall.setInvitees(Collections.singletonList(new ZegoUIKitUser(targetedId)));
 
-    private void startService(String userID,String userName){
+    }
+
+    private void startService(String userID){
         Application application = getApplication();
         long appId =1453071286;
         String appSign ="3d5332b2094993b3adf3a8899e06ecff8f6d7242d773ff9581446c715e4163fb";
