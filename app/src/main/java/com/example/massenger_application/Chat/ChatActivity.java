@@ -171,7 +171,7 @@ public class ChatActivity extends AppCompatActivity {
       });
 
       setVoiceCall(receiverId);
-      setVideoCall(receiverId);
+     // setVideoCall(receiverId);
       userInfo();
       initRecycler();
       CreateChatRoom();
@@ -182,7 +182,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
       startService(senderId);
-      Log.e("MyApp","name"+userName);
+
 
     }
 
