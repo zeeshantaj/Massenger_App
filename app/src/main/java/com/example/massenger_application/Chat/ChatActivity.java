@@ -1,5 +1,6 @@
 package com.example.massenger_application.Chat;
 
+import static com.example.massenger_application.NotificationService.APICall.callApi;
 import static com.example.massenger_application.Utils.FirebaseUtils.currentUserId;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.example.massenger_application.Activities.Other_User_ProfileActivity;
 import com.example.massenger_application.Colors_fragment.Color_Selection_Activity;
 import com.example.massenger_application.Interfaces.ImageUrlCallback;
+import com.example.massenger_application.NotificationService.APICall;
 import com.example.massenger_application.R;
 import com.example.massenger_application.Utils.FirebaseUtils;
 import com.example.massenger_application.VoiceCall.Voice_Call_Activity;

@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class APICall {
-    public  void callApi(JSONObject jsonObject){
+    public static void callApi(JSONObject jsonObject){
         MediaType json = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         String url = "https://fcm.googleapis.com/fcm/send";
